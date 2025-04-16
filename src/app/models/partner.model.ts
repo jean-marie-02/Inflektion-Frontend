@@ -2,8 +2,8 @@ export interface Partner {
     id: number;
     partnerName: string;
     partnerType: string;
-    grossSales: number;
+    grosssales: number;
     conversions: number;
     commissions: number;
+    contract: string;
   }
-  

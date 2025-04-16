@@ -10,6 +10,7 @@ import { NgIf, CurrencyPipe } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { MatSidenavModule } from '@angular/material/sidenav';
 
 import { PartnerService } from './services/partner.service';
 import { Partner } from './models/partner.model';
@@ -26,6 +27,7 @@ import { Partner } from './models/partner.model';
     MatFormFieldModule,
     MatInputModule,
     MatNativeDateModule,
+    MatSidenavModule,
   ],
   providers: [ MatDatepickerModule, MatNativeDateModule, ],
   selector: 'app-dashboard',
@@ -39,9 +41,10 @@ export class AppComponent implements OnInit {
     'id',
     'partnerName',
     'partnerType',
+    'contract',
     'grossSales',
-    'conversions',
     'commissions',
+    'conversions',
   ];
 
   title = 'Inflektion-Frontend';

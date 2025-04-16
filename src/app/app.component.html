@@ -1,151 +1,117 @@
-<div class="dashboard-container">
+<div class="dashboard">
+  <!-- Header (matching Figma design) -->
+  <header class="header">
+    <div class="logo-section">
+      <img src="assets/inflektion_logo.svg" alt="Inflektion Logo" class="logo" />
+      <h1>Power Plate</h1>
+    </div>
+    <div class="user-section">
+      <span class="username">User Name</span>
+      <img src="assets/user_avatar.png" alt="User Avatar" class="avatar" />
+    </div>
+  </header>
 
-    <!-- Top Bar / Header -->
-    <div class="header-bar">
-      <div class="left-logo-title">
-        <img src="assets/inflektion_logo.svg" alt="Inflektion Logo" class="logo" />
-        <h2>Power Plate</h2>
+  <mat-drawer-container>
+    <mat-drawer mode="side" opened>
+      <nav class="nav-bar">
+        <div class="nav-actions">
+          <mat-sidenav-container class="max-width">
+          <mat-sidenav-content>
+            <button class="nav-btn active">Dashboard</button>
+          </mat-sidenav-content>
+          <mat-sidenav-content>
+            <button class="nav-btn">Partners</button>
+          </mat-sidenav-content>
+          <mat-sidenav-content>
+            <button class="nav-btn">Approvals</button>
+          </mat-sidenav-content>
+        </mat-sidenav-container>
       </div>
-      <div class="right-user-info">
-        <span>TEST User</span>
-        <img
-          src="assets/user_avatar.png"
-          alt="User Avatar"
-          class="user-avatar"
-        />
-      </div>
+    </nav>
+
+    </mat-drawer>
+    <mat-drawer-content>
+ 
+    <mat-form-field appearance="outline" class="date-picker">
+      <mat-label>Date Range</mat-label>
+      <mat-date-range-input [rangePicker]="picker" (dateChange)="onDateRangeSelected()">
+        <input matStartDate placeholder="Start date" [(ngModel)]="startDate">
+        <input matEndDate placeholder="End date" [(ngModel)]="endDate">
+      </mat-date-range-input>
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-date-range-picker #picker></mat-date-range-picker>
+    </mat-form-field>
+    <div class="table-btns-section">
+      <button mat-button (click)="onChooseColumns()">Choose Columns</button>
+      <button mat-raised-button color="primary" (click)="onMessagePartners()">Message Partners</button>
+      <button mat-raised-button color="accent" (click)="onExportList()">Export List</button>
     </div>
-  
-    <!-- Sub-Header / Navigation -->
-    <div class="sub-header">
-      <div class="section-left">
-        <button class="nav-button active">Dashboard</button>
-        <button class="nav-button">Partners</button>
-        <button class="nav-button">Approvals</button>
-      </div>
-  
-      <div class="section-right">
-        <!-- Example date-range using Angular Material -->
-        <mat-form-field appearance="fill" class="date-range-field">
-          <mat-label>Date Range</mat-label>
-          <mat-date-range-input
-            [rangePicker]="picker"
-            (dateChange)="onDateRangeSelected()"
-          >
-            <input
-              matStartDate
-              placeholder="Start date"
-              [(ngModel)]="startDate"
-            />
-            <input matEndDate placeholder="End date" [(ngModel)]="endDate" />
-          </mat-date-range-input>
-          <mat-datepicker-toggle
-            matSuffix
-            [for]="picker"
-          ></mat-datepicker-toggle>
-          <mat-date-range-picker #picker></mat-date-range-picker>
-        </mat-form-field>
-  
-        <button mat-raised-button color="primary" (click)="onChooseColumns()">
-          Choose Columns
-        </button>
-        <button mat-raised-button color="accent" (click)="onMessagePartners()">
-          Message Partners
-        </button>
-        <button mat-raised-button color="warn" (click)="onExportList()">
-          Export List
-        </button>
-      </div>
-    </div>
-  
-    <!-- Main Content Area -->
-    <div class="main-content">
-      <!-- Error or Loading States -->
-      <div *ngIf="isLoading" class="loading-spinner">
+
+      <!-- Main Content -->
+    <main class="content">
+      <div *ngIf="isLoading" class="loading">
         <mat-spinner></mat-spinner>
-        <p>Loading partners data...</p>
+        <p>Loading data...</p>
       </div>
-  
-      <div *ngIf="!isLoading && errorMsg" class="error-message">
-        {{ errorMsg }}
+
+      <div *ngIf="!isLoading && errorMsg" class="error">
+        <p>{{ errorMsg }}</p>
       </div>
-  
-      <!-- The Partners Table -->
+
       <div *ngIf="!isLoading && !errorMsg" class="table-container">
-  
-        <!-- Optional Filter Input -->
-        <!--
-        <mat-form-field appearance="fill">
-          <mat-label>Filter by anything</mat-label>
-          <input matInput (input)="applyFilter()" [(ngModel)]="filterValue" />
-        </mat-form-field>
-        -->
-  
-        <table mat-table [dataSource]="dataSource" matSort>
-  
+        <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort>
           <!-- ID Column -->
           <ng-container matColumnDef="id">
             <th mat-header-cell *matHeaderCellDef mat-sort-header>ID</th>
-            <td mat-cell *matCellDef="let partner">{{ partner.id }}</td>
+            <td mat-cell *matCellDef="let element">{{ element.id }}</td>
           </ng-container>
-  
+
           <!-- Partner Name Column -->
           <ng-container matColumnDef="partnerName">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header>
-              Partner Name
-            </th>
-            <td mat-cell *matCellDef="let partner">{{ partner.partnerName }}</td>
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Name</th>
+            <td mat-cell *matCellDef="let element">{{ element.partnerName }}</td>
           </ng-container>
-  
+
           <!-- Partner Type Column -->
           <ng-container matColumnDef="partnerType">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header>
-              Partner Type
-            </th>
-            <td mat-cell *matCellDef="let partner">{{ partner.partnerType }}</td>
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Type</th>
+            <td mat-cell *matCellDef="let element">{{ element.partnerType }}</td>
           </ng-container>
-  
+
+          <!-- Contract Column -->
+          <ng-container matColumnDef="contract">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Contract</th>
+            <td mat-cell *matCellDef="let element">{{ element.contract }}</td>
+          </ng-container>
+
           <!-- Gross Sales Column -->
           <ng-container matColumnDef="grossSales">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header>
-              Gross Sales
-            </th>
-            <td mat-cell *matCellDef="let partner">
-              {{ partner.grossSales | currency:'USD' }}
-            </td>
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Gross Sales</th>
+            <td mat-cell *matCellDef="let element">{{ element.grosssales | currency:'USD' }}</td>
           </ng-container>
-  
+
+           <!-- Commissions Column -->
+           <ng-container matColumnDef="commissions">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Commissions</th>
+            <td mat-cell *matCellDef="let element">{{ element.commissions | currency:'USD' }}</td>
+          </ng-container>
+
           <!-- Conversions Column -->
           <ng-container matColumnDef="conversions">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header>
-              Conversions
-            </th>
-            <td mat-cell *matCellDef="let partner">{{ partner.conversions }}</td>
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Conversions</th>
+            <td mat-cell *matCellDef="let element">{{ element.conversions }}</td>
           </ng-container>
-  
-          <!-- Commissions Column -->
-          <ng-container matColumnDef="commissions">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header>
-              Commissions
-            </th>
-            <td mat-cell *matCellDef="let partner">
-              {{ partner.commissions | currency:'USD' }}
-            </td>
-          </ng-container>
-  
+
           <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
           <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
         </table>
-  
+
         <!-- Paginator -->
-        <mat-paginator
-          [length]="dataSource.data.length"
-          [pageSize]="pageSize"
-          [pageSizeOptions]="[5, 10, 15, 20]"
-        >
-        </mat-paginator>
-  
+        <mat-paginator [pageSize]="pageSize" [pageSizeOptions]="[5, 10, 15, 20]"></mat-paginator>
       </div>
-    </div>
-  </div>
-  
+    </main>
+
+    </mat-drawer-content>
+  </mat-drawer-container>
+
+</div>
