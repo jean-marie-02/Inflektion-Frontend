@@ -1,12 +1,30 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
+import { MatTableModule } from '@angular/material/table';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatSort } from '@angular/material/sort';
+import { NgIf, CurrencyPipe } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 
 import { PartnerService } from './services/partner.service';
 import { Partner } from './models/partner.model';
 
 @Component({
+  imports: [ 
+    NgIf,
+    CurrencyPipe, 
+    MatPaginator, 
+    MatProgressSpinnerModule,
+    MatDatepickerModule,
+    MatTableModule,
+    FormsModule,
+    MatFormFieldModule,
+    MatInputModule,
+  ],
   selector: 'app-dashboard',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
