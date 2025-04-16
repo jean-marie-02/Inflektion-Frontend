@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
+import { MatNativeDateModule } from '@angular/material/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableModule } from '@angular/material/table';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
@@ -24,7 +25,9 @@ import { Partner } from './models/partner.model';
     FormsModule,
     MatFormFieldModule,
     MatInputModule,
+    MatNativeDateModule,
   ],
+  providers: [ MatDatepickerModule, MatNativeDateModule, ],
   selector: 'app-dashboard',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
