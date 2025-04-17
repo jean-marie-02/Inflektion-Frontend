@@ -1,21 +1,16 @@
 <div class="dashboard">
-  <!-- Header (matching Figma design) -->
-  <header class="header">
-    <div class="logo-section">
-      <img src="assets/inflektion_logo.svg" alt="Inflektion Logo" class="logo" />
-      <h1>Power Plate</h1>
-    </div>
-    <div class="user-section">
-      <span class="username">User Name</span>
-      <img src="assets/user_avatar.png" alt="User Avatar" class="avatar" />
-    </div>
-  </header>
-
   <mat-drawer-container>
     <mat-drawer mode="side" opened>
       <nav class="nav-bar">
         <div class="nav-actions">
+          
           <mat-sidenav-container class="max-width">
+          <mat-sidenav-content>
+            <div class="logo-section">
+            <img src="assets/inflektion_logo.svg" alt="Inflektion Logo" class="logo" />
+          </div>
+
+          </mat-sidenav-content>
           <mat-sidenav-content>
             <button class="nav-btn active">Dashboard</button>
           </mat-sidenav-content>
@@ -31,6 +26,18 @@
 
     </mat-drawer>
     <mat-drawer-content>
+    
+    <div class="top-bar">
+      <span class="status-section">
+        <h1>Power Plate</h1>
+        <h6>Dashboard</h6>
+      </span>
+    
+      <div class="user-section">
+        <img src="assets/avatar.png" alt="User Avatar" class="avatar" />
+        <span class="username">TEST User</span>
+      </div>
+    </div>
  
     <mat-form-field appearance="outline" class="date-picker">
       <mat-label>Date Range</mat-label>
@@ -41,11 +48,14 @@
       <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
       <mat-date-range-picker #picker></mat-date-range-picker>
     </mat-form-field>
-    <div class="table-btns-section">
-      <button mat-button (click)="onChooseColumns()">Choose Columns</button>
-      <button mat-raised-button color="primary" (click)="onMessagePartners()">Message Partners</button>
-      <button mat-raised-button color="accent" (click)="onExportList()">Export List</button>
-    </div>
+
+    <span class="table-ctrls">
+      <div class="table-btns-section">
+        <button mat-button (click)="onChooseColumns()">Choose Columns</button>
+        <button mat-raised-button color="primary" (click)="onMessagePartners()">Message Partners</button>
+        <button mat-raised-button color="accent" (click)="onExportList()">Export List</button>
+      </div>
+    </span>
 
       <!-- Main Content -->
     <main class="content">
