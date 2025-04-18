@@ -76,7 +76,7 @@
       padding-left: 10rem;
   
       button {
-        flex: 1 1 auto;
+        //flex: 1 1 auto;
         margin: 0 0.75rem;
         padding: 0.65rem 1rem 0.65rem 1rem;
         text-align: center;
@@ -96,15 +96,16 @@
     justify-content: space-between;
     align-items: center;
     padding: 0.5rem;
-   
-
+  
     .nav-btn {
-      margin-right: 1rem;
+      display: block;
+      align-items: center;
+      justify-content: space-between;
+      font-family: Poppins;
       background: none;
       border: none;
-      padding: 0.5rem 1rem;
-      cursor: pointer;
-      width: 100%;
+      padding: 0.5rem 0rem;
+      width: 95%;
       height: 3rem;
       transition: background-color 0.3s ease;
 
@@ -116,12 +117,6 @@
       
       &:not(.active) {
         color: #9097B9;
-        background-color:#fff;
-        border-radius: 0px;
-      }
-
-      &:hover:not(.active) {
-        background-color: #f0f0f0;
       }
     }
 

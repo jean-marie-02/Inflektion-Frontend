@@ -1,11 +1,10 @@
 @use '@angular/material' as mat;
 
-html, body { height: 100%; }
-body { 
-    margin: 0; 
-    font-size: 1rem !important;
-    font-family: Poppins, Roboto, "Helvetica Neue", sans-serif;
-
+html, body { 
+    height: 100%; 
+    font-family: Poppins;
+    font-size: var(--mat-table-row-item-label-text-size, var(--mat-sys-body-medium-size, 14px));
+    font-weight: var(--mat-table-row-item-label-text-weight, var(--mat-sys-body-medium-weight));
 
     @include mat.theme((
         color: (
@@ -15,7 +14,6 @@ body {
         ),
         typography: Poppins,
         density: 0,
-        
     ));
 
     @include mat.paginator-overrides((
@@ -38,7 +36,6 @@ body {
         justify-content: center;
         color: white !important;
         font-size: 14px;
-        cursor: pointer;
         transition: 0.3s;
       }
       
