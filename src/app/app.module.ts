@@ -16,9 +16,10 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 import { AppComponent } from './app.component';
+import { StylePaginatorDirective } from './directives/paginator.directive';
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, StylePaginatorDirective],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,

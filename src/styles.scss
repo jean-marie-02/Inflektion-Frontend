@@ -1,8 +1,54 @@
-/* You can add global styles to this file, and also import other style files */
+@use '@angular/material' as mat;
 
 html, body { height: 100%; }
 body { 
     margin: 0; 
     font-size: 1rem !important;
     font-family: Poppins, Roboto, "Helvetica Neue", sans-serif;
+
+
+    @include mat.theme((
+        color: (
+            theme-type: light,
+            primary: mat.$azure-palette,
+            tertiary: mat.$blue-palette,
+        ),
+        typography: Poppins,
+        density: 0,
+        
+    ));
+
+    @include mat.paginator-overrides((
+        enabled-icon-color: #031050,
+        container-text-font: Poppins,
+    ));
+
+    .paginator-container {
+        display: flex;
+        gap: 4px;
+      }
+      
+      .paginator {
+        background-color: #5E33CE;
+        border-radius: 50%;
+        width: 34px;
+        height: 34px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white !important;
+        font-size: 14px;
+        cursor: pointer;
+        transition: 0.3s;
+      }
+      
+      /*.paginator:hover {
+        background-color: #b6b6b6;
+        color: white;
+      }
+      
+      .paginator__active {
+        background-color: #6193a1;
+        color: white;
+      }*/
 }

@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatNativeDateModule } from '@angular/material/core';
-import { MatPaginator } from '@angular/material/paginator';
+import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatTableModule } from '@angular/material/table';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatDatepickerModule } from '@angular/material/datepicker';
@@ -11,9 +11,12 @@ import { FormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatButtonModule } from '@angular/material/button';
 
 import { PartnerService } from './services/partner.service';
 import { Partner } from './models/partner.model';
+import { StylePaginatorDirective } from './directives/paginator.directive';
+import { waitForAsync } from '@angular/core/testing';
 
 @Component({
   imports: [ 
@@ -28,8 +31,13 @@ import { Partner } from './models/partner.model';
     MatInputModule,
     MatNativeDateModule,
     MatSidenavModule,
+    MatPaginatorModule,
+    StylePaginatorDirective,
+    MatButtonModule
   ],
-  providers: [ MatDatepickerModule, MatNativeDateModule, ],
+  providers: [ MatDatepickerModule, MatNativeDateModule,
+  ],
+  standalone: true,
   selector: 'app-dashboard',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
@@ -45,41 +53,52 @@ export class AppComponent implements OnInit {
     'grossSales',
     'commissions',
     'conversions',
+    'details',
   ];
 
+  isLoading = true;
+  errorMsg = '';
   title = 'Inflektion-Frontend';
 
   dataSource = new MatTableDataSource<Partner>([]);
   pageSize = 15; // 15 records per page
-  isLoading = true;
-  errorMsg = '';
 
-  // For filtering (optional)
-  // filterValue = '';
+  private paginator!: MatPaginator;
+  private sort!: MatSort;
 
-  // Using ViewChild decorators for Material paginator and sort
-  @ViewChild(MatPaginator) paginator!: MatPaginator;
-  @ViewChild(MatSort) sort!: MatSort;
+  @ViewChild(MatSort) set matSort(ms: MatSort) {
+    this.sort = ms;
+    this.setDataSourceAttributes();
+  }
 
+  @ViewChild(MatPaginator) set matPaginator(mp: MatPaginator) {
+    this.paginator = mp;
+    this.setDataSourceAttributes();
+  }
+
+  setDataSourceAttributes() {
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
+
+    // if (this.paginator && this.sort) {
+    //   this.applyFilter('');
+    // }
+  }
+ 
   // Date range variables (for demonstration)
   startDate!: Date;
   endDate!: Date;
 
+
   constructor(private partnerService: PartnerService) {}
 
   ngOnInit(): void {
-    this.fetchPartnerData();
-  }
-
-  fetchPartnerData(): void {
     this.isLoading = true;
     this.errorMsg = '';
 
     this.partnerService.getPartners().subscribe({
       next: (partners: Partner[]) => {
         this.dataSource.data = partners;
-        // Assign paginator and sort after data is set
-        this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
         this.isLoading = false;
       },
