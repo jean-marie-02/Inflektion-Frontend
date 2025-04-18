@@ -26,10 +26,6 @@ import { map, startWith } from 'rxjs';
 export class StylePaginatorDirective implements AfterViewInit {
   @Output() pageIndexChangeEmitter: EventEmitter<number> =
     new EventEmitter<number>();
-  @Input() showFirstButton = true;
-  @Input() showLastButton = true;
-  @Input() renderButtonsNumber = 2;
-  @Input() hideDefaultArrows = false;
 
   private containerRef!: HTMLElement;
   private buttonsRef!: HTMLElement;
@@ -107,17 +103,12 @@ export class StylePaginatorDirective implements AfterViewInit {
     // Center the paginator controls.
     this.ren.setStyle(paginatorContainer, 'display', 'grid');
     this.ren.setStyle(paginatorContainer, 'justify-content', 'center');
+    this.ren.setStyle(paginatorContainer, 'background-color', '#f4f6f8');
     this.ren.setAttribute(paginatorOuterContainer, 'layout-align', 'center center');
     this.ren.setAttribute(paginatorOuterContainer, 'layout', 'column');
    
     // style text of how many elements are currently displayed
     this.ren.setStyle(howManyDisplayedEl, 'display', 'none');
-
-    // check whether the user wants to remove left & right default arrow
-    if (this.hideDefaultArrows) {
-      this.ren.setStyle(previousButton, 'display', 'none');
-      this.ren.setStyle(nextButtonDefault, 'display', 'none');
-    }
   }
 
   private createContainerDivRef(): void {
