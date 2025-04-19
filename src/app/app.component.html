@@ -7,18 +7,18 @@
           <mat-sidenav-container class="max-width">
           <mat-sidenav-content>
             <div class="logo-section">
-            <img src="assets/inflektion_logo.svg" alt="Inflektion Logo" class="logo" />
+            <img src="inflektion_logo.svg" alt="Inflektion Logo" class="logo" />
           </div>
 
           </mat-sidenav-content>
           <mat-sidenav-content>
-            <button class="nav-btn active">Dashboard</button>
+            <button class="nav-btn active"><mat-icon svgIcon="home"></mat-icon>Dashboard</button>
           </mat-sidenav-content>
           <mat-sidenav-content>
-            <button class="nav-btn">Partners</button>
+            <button class="nav-btn"><mat-icon svgIcon="partners"></mat-icon>Partners</button>
           </mat-sidenav-content>
           <mat-sidenav-content>
-            <button class="nav-btn">Approvals</button>
+            <button class="nav-btn"><mat-icon svgIcon="approvals"></mat-icon>Approvals</button>
           </mat-sidenav-content>
         </mat-sidenav-container>
       </div>
@@ -34,7 +34,7 @@
       </span>
     
       <div class="user-section">
-        <img src="assets/avatar.png" alt="User Avatar" class="avatar" />
+        <img src="avatar.png" alt="User Avatar" class="avatar" />
         <span class="username">TEST User</span>
       </div>
     </div>
@@ -51,9 +51,9 @@
 
     <span class="table-ctrls">
       <div class="table-btns-section">
-        <button mat-button (click)="onChooseColumns()">Choose Columns</button>
-        <button mat-raised-button color="primary" (click)="onMessagePartners()">Message Partners</button>
-        <button mat-raised-button color="accent" (click)="onExportList()">Export List</button>
+        <button class="top-btn" mat-raised-button (click)="onChooseColumns()">Choose Columns<mat-icon svgIcon="lists"></mat-icon></button>
+        <button class="top-btn" mat-raised-button (click)="onMessagePartners()">Message Partners<mat-icon svgIcon="mail"></mat-icon></button>
+        <button class="top-btn" mat-raised-button (click)="onExportList()">Export List<mat-icon svgIcon="download"></mat-icon></button>
       </div>
     </span>
 
@@ -72,50 +72,52 @@
         <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort>
           <!-- ID Column -->
           <ng-container matColumnDef="id">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header>ID</th>
+            <th mat-header-cell *matHeaderCellDef mat-sort-header="id">ID</th>
             <td mat-cell *matCellDef="let element">{{ element.id }}</td>
           </ng-container>
 
           <!-- Partner Name Column -->
           <ng-container matColumnDef="partnerName">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header>Name</th>
+            <th mat-header-cell *matHeaderCellDef mat-sort-header="partnerName">Name</th>
             <td mat-cell *matCellDef="let element">{{ element.partnerName }}</td>
           </ng-container>
 
           <!-- Partner Type Column -->
           <ng-container matColumnDef="partnerType">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header>Type</th>
+            <th mat-header-cell *matHeaderCellDef mat-sort-header="partnerType">Type</th>
             <td mat-cell *matCellDef="let element">{{ element.partnerType }}</td>
           </ng-container>
 
           <!-- Contract Column -->
           <ng-container matColumnDef="contract">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header>Contract</th>
+            <th mat-header-cell *matHeaderCellDef mat-sort-header="contract">Contract</th>
             <td mat-cell *matCellDef="let element">{{ element.contract }}</td>
           </ng-container>
 
           <!-- Gross Sales Column -->
           <ng-container matColumnDef="grossSales">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header>Gross Sales</th>
+            <th mat-header-cell *matHeaderCellDef mat-sort-header="grosssales">Gross Sales</th>
             <td mat-cell *matCellDef="let element">{{ element.grosssales | currency:'USD' }}</td>
           </ng-container>
 
            <!-- Commissions Column -->
            <ng-container matColumnDef="commissions">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header>Commissions</th>
+            <th mat-header-cell *matHeaderCellDef mat-sort-header="commissions">Commissions</th>
             <td mat-cell *matCellDef="let element">{{ element.commissions | currency:'USD' }}</td>
           </ng-container>
 
           <!-- Conversions Column -->
           <ng-container matColumnDef="conversions">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header>Conversions</th>
+            <th mat-header-cell *matHeaderCellDef mat-sort-header="conversions">Conversions</th>
             <td mat-cell *matCellDef="let element">{{ element.conversions }}</td>
           </ng-container>
 
            <!-- Details Column -->
           <ng-container matColumnDef="details">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> </th>
-            <td mat-cell *matCellDef=""><button mat-button class="details-btn">Details</button></td>
+            <th mat-header-cell *matHeaderCellDef> </th>
+            <td mat-cell *matCellDef="">
+              <button mat-button class="details-btn"><mat-icon svgIcon="details"></mat-icon>Details</button>
+            </td>
           </ng-container>
 
           <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

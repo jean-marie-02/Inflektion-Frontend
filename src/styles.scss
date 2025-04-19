@@ -1,4 +1,5 @@
 @use '@angular/material' as mat;
+@import url("https://fonts.googleapis.com/icon?family=Material+Icons");
 
 html, body { 
     height: 100%; 
@@ -21,6 +22,16 @@ html, body {
         container-text-font: Poppins,
     ));
 
+    @include mat.sort-overrides((
+        arrow-color: #fff,
+    ));
+
+    .mat-icon {
+        margin: 0.5rem !important;
+        height: 15px !important;
+        width: 15px !important;
+      }
+
     .paginator-container {
         display: flex;
         gap: 4px;
@@ -38,14 +49,4 @@ html, body {
         font-size: 14px;
         transition: 0.3s;
       }
-      
-      /*.paginator:hover {
-        background-color: #b6b6b6;
-        color: white;
-      }
-      
-      .paginator__active {
-        background-color: #6193a1;
-        color: white;
-      }*/
 }

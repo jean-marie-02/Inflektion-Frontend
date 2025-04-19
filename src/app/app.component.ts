@@ -1,22 +1,22 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, ChangeDetectionStrategy, inject } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatTableModule } from '@angular/material/table';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatDatepickerModule } from '@angular/material/datepicker';
-import { MatSort } from '@angular/material/sort';
+import { MatSort, MatSortModule } from '@angular/material/sort';
 import { NgIf, CurrencyPipe } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSidenavModule } from '@angular/material/sidenav';
-import { MatButtonModule } from '@angular/material/button';
+import { MatIconRegistry, MatIconModule } from '@angular/material/icon';
+import {DomSanitizer} from '@angular/platform-browser';
 
 import { PartnerService } from './services/partner.service';
 import { Partner } from './models/partner.model';
 import { StylePaginatorDirective } from './directives/paginator.directive';
-import { waitForAsync } from '@angular/core/testing';
 
 @Component({
   imports: [ 
@@ -33,10 +33,11 @@ import { waitForAsync } from '@angular/core/testing';
     MatSidenavModule,
     MatPaginatorModule,
     StylePaginatorDirective,
-    MatButtonModule
+    MatSortModule,
+    MatIconModule
   ],
-  providers: [ MatDatepickerModule, MatNativeDateModule,
-  ],
+  providers: [ MatDatepickerModule, MatNativeDateModule],
+  changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
   selector: 'app-dashboard',
   templateUrl: './app.component.html',
@@ -90,7 +91,22 @@ export class AppComponent implements OnInit {
   endDate!: Date;
 
 
-  constructor(private partnerService: PartnerService) {}
+  constructor(private partnerService: PartnerService) 
+  {
+    const iconRegistry = inject(MatIconRegistry);
+    const sanitizer = inject(DomSanitizer);
+
+    iconRegistry.addSvgIcon('approvals', sanitizer.bypassSecurityTrustResourceUrl('approvals.svg'));
+    iconRegistry.addSvgIcon('calendar', sanitizer.bypassSecurityTrustResourceUrl('calendar.svg'));
+    iconRegistry.addSvgIcon('details', sanitizer.bypassSecurityTrustResourceUrl('details.svg'));
+    iconRegistry.addSvgIcon('down-arrow', sanitizer.bypassSecurityTrustResourceUrl('down-arrow.svg'));
+    iconRegistry.addSvgIcon('download', sanitizer.bypassSecurityTrustResourceUrl('download.svg'));
+    iconRegistry.addSvgIcon('home', sanitizer.bypassSecurityTrustResourceUrl('home.svg'));
+    iconRegistry.addSvgIcon('lists', sanitizer.bypassSecurityTrustResourceUrl('lists.svg'));
+    iconRegistry.addSvgIcon('mail', sanitizer.bypassSecurityTrustResourceUrl('mail.svg'));
+    iconRegistry.addSvgIcon('partners', sanitizer.bypassSecurityTrustResourceUrl('partners.svg'));
+    iconRegistry.addSvgIcon('up-arrow', sanitizer.bypassSecurityTrustResourceUrl('up-arrow.svg'));
+  }
 
   ngOnInit(): void {
     this.isLoading = true;

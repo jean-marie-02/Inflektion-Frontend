@@ -52,16 +52,14 @@
   }
 
   .details-btn {
-      flex: 1 1 auto;
-      margin: 0 0.5rem;
-      padding: 0.4rem 1rem 0.4rem 1rem;
-      text-align: center;
-      color: white;
-      text-shadow: 0px 0px 10px rgba(0,0,0,0.2);
-      box-shadow: 0 0 20px #eee;
-      border-color: #5E33CE;
-      border-radius: 30px;
-      background-color: #5E33CE;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0.2rem;
+    color: white;
+    border-color: #5E33CE;
+    border-radius: 30px;
+    background-color: #5E33CE;
   }
 
   .table-ctrls {
@@ -70,19 +68,18 @@
     align-items: center;
 
     .table-btns-section {
-      display: inline-block;
+      display: inline-flex;
       justify-content: center;
       align-items: center;
       padding-left: 10rem;
   
       button {
-        //flex: 1 1 auto;
+        display: flex;
+        align-items: center;
+        justify-content: center;
         margin: 0 0.75rem;
-        padding: 0.65rem 1rem 0.65rem 1rem;
-        text-align: center;
+        padding: 0.4rem 1rem 0.4rem 1rem;
         color: white;
-        text-shadow: 0px 0px 10px rgba(0,0,0,0.2);
-        box-shadow: 0 0 20px #eee;
         border-color: #1E0B50;
         border-radius: 30px;
         background-image: linear-gradient(to bottom, #5E33CE 10%, #1E0B50 90%);
@@ -98,9 +95,9 @@
     padding: 0.5rem;
   
     .nav-btn {
-      display: block;
+      display: flex;
       align-items: center;
-      justify-content: space-between;
+      justify-content: center;
       font-family: Poppins;
       background: none;
       border: none;
