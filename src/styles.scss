@@ -1,8 +1,8 @@
 @use '@angular/material' as mat;
 @import url("https://fonts.googleapis.com/icon?family=Material+Icons");
 
-html, body { 
-    height: 100%; 
+html, body {
+    height: 100%;
     font-family: Poppins;
     font-size: var(--mat-table-row-item-label-text-size, var(--mat-sys-body-medium-size, 14px));
     font-weight: var(--mat-table-row-item-label-text-weight, var(--mat-sys-body-medium-weight));
@@ -26,18 +26,26 @@ html, body {
         arrow-color: #fff,
     ));
 
-    .mat-icon {
+    @include mat.list-overrides((
+        list-item-hover-label-text-color: #9097B9,
+    ));
+
+    .mdc-list-item--with-leading-icon .mat-icon {
+        padding: 0.5rem;
+    }
+
+    .btn-icon {
         margin: 0.5rem !important;
         height: 15px !important;
         width: 15px !important;
-      }
+    }
 
     .paginator-container {
         display: flex;
         gap: 4px;
       }
-      
-      .paginator {
+
+    .paginator {
         background-color: #5E33CE;
         border-radius: 50%;
         width: 34px;
@@ -48,5 +56,37 @@ html, body {
         color: white !important;
         font-size: 14px;
         transition: 0.3s;
-      }
+    }
+
+    .mat-mdc-nav-list .mat-mdc-list-item {
+        border-radius: 1px;
+    }
+
+    mat-list-item {
+        &.hover {
+            opacity: 100%;
+        }
+
+        &.active {
+          background-color: #031050;
+
+          mat-icon svg path {
+            fill: #FF13B8;
+          }
+
+          .mat-mdc-list-item-title {
+            color:#fff;
+          }
+        }
+
+        &:not(.active) {
+            mat-icon svg path {
+                fill: #9097B9;
+              }
+
+            .mat-mdc-list-item-title {
+                color:#9097B9;
+            }
+        }
+    }
 }

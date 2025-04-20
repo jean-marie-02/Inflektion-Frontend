@@ -1,44 +1,41 @@
 <div class="dashboard">
-  <mat-drawer-container>
-    <mat-drawer mode="side" opened>
-      <nav class="nav-bar">
-        <div class="nav-actions">
-          
-          <mat-sidenav-container class="max-width">
-          <mat-sidenav-content>
-            <div class="logo-section">
-            <img src="inflektion_logo.svg" alt="Inflektion Logo" class="logo" />
-          </div>
+  <mat-sidenav-container>
+    <mat-sidenav mode="side" opened="true">
+      <mat-nav-list>
+        <mat-list-item class="logo-section">
+          <img matListItemTitle src="inflektion_logo.svg" alt="Inflektion Logo"/>
+          <mat-icon matListItemIcon>list</mat-icon>
+        </mat-list-item>
 
-          </mat-sidenav-content>
-          <mat-sidenav-content>
-            <button class="nav-btn active"><mat-icon svgIcon="home"></mat-icon>Dashboard</button>
-          </mat-sidenav-content>
-          <mat-sidenav-content>
-            <button class="nav-btn"><mat-icon svgIcon="partners"></mat-icon>Partners</button>
-          </mat-sidenav-content>
-          <mat-sidenav-content>
-            <button class="nav-btn"><mat-icon svgIcon="approvals"></mat-icon>Approvals</button>
-          </mat-sidenav-content>
-        </mat-sidenav-container>
-      </div>
-    </nav>
+        <mat-list-item class="active">
+            <mat-icon matListItemIcon svgIcon="home"></mat-icon>
+						<span matListItemTitle>Dashboard</span>
+				</mat-list-item>
+        <mat-list-item class="">
+            <mat-icon matListItemIcon svgIcon="partners"></mat-icon>
+						<span matListItemTitle>Partners</span>
+				</mat-list-item>
+        <mat-list-item class="">
+            <mat-icon matListItemIcon svgIcon="approvals"></mat-icon>
+						<span matListItemTitle >Approvals</span>
+				</mat-list-item>
+    </mat-nav-list>
 
-    </mat-drawer>
-    <mat-drawer-content>
-    
+  </mat-sidenav>
+
+  <mat-sidenav-content>
     <div class="top-bar">
       <span class="status-section">
         <h1>Power Plate</h1>
         <h6>Dashboard</h6>
       </span>
-    
+
       <div class="user-section">
         <img src="avatar.png" alt="User Avatar" class="avatar" />
         <span class="username">TEST User</span>
       </div>
     </div>
- 
+
     <mat-form-field appearance="outline" class="date-picker">
       <mat-label>Date Range</mat-label>
       <mat-date-range-input [rangePicker]="picker" (dateChange)="onDateRangeSelected()">
@@ -51,9 +48,18 @@
 
     <span class="table-ctrls">
       <div class="table-btns-section">
-        <button class="top-btn" mat-raised-button (click)="onChooseColumns()">Choose Columns<mat-icon svgIcon="lists"></mat-icon></button>
-        <button class="top-btn" mat-raised-button (click)="onMessagePartners()">Message Partners<mat-icon svgIcon="mail"></mat-icon></button>
-        <button class="top-btn" mat-raised-button (click)="onExportList()">Export List<mat-icon svgIcon="download"></mat-icon></button>
+        <button class="top-btn" mat-raised-button (click)="onChooseColumns()">
+          <span>Columns</span>
+          <mat-icon class="btn-icon" svgIcon="lists"></mat-icon>
+        </button>
+        <button class="top-btn" mat-raised-button (click)="onMessagePartners()">
+          <span>Message Partners</span>
+          <mat-icon class="btn-icon" svgIcon="mail"></mat-icon>
+        </button>
+        <button class="top-btn" mat-raised-button (click)="onExportList()">
+          <span>Export List</span>
+          <mat-icon class="btn-icon" svgIcon="download"></mat-icon>
+        </button>
       </div>
     </span>
 
@@ -116,7 +122,10 @@
           <ng-container matColumnDef="details">
             <th mat-header-cell *matHeaderCellDef> </th>
             <td mat-cell *matCellDef="">
-              <button mat-button class="details-btn"><mat-icon svgIcon="details"></mat-icon>Details</button>
+              <button mat-button class="details-btn">
+                <mat-icon class="btn-icon" svgIcon="details"></mat-icon>
+                <span>Details</span>
+              </button>
             </td>
           </ng-container>
 
@@ -135,7 +144,7 @@
       </div>
     </main>
 
-    </mat-drawer-content>
-  </mat-drawer-container>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
 
 </div>

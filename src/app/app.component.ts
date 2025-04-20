@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ChangeDetectionStrategy, inject } from '@angular/core';
+import { Component, OnInit, ViewChild, ChangeDetectionStrategy, inject, } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
@@ -12,17 +12,18 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconRegistry, MatIconModule } from '@angular/material/icon';
-import {DomSanitizer} from '@angular/platform-browser';
+import { DomSanitizer } from '@angular/platform-browser';
+import { MatListModule } from '@angular/material/list';
 
 import { PartnerService } from './services/partner.service';
 import { Partner } from './models/partner.model';
 import { StylePaginatorDirective } from './directives/paginator.directive';
 
 @Component({
-  imports: [ 
+  imports: [
     NgIf,
-    CurrencyPipe, 
-    MatPaginator, 
+    CurrencyPipe,
+    MatPaginator,
     MatProgressSpinnerModule,
     MatDatepickerModule,
     MatTableModule,
@@ -34,7 +35,8 @@ import { StylePaginatorDirective } from './directives/paginator.directive';
     MatPaginatorModule,
     StylePaginatorDirective,
     MatSortModule,
-    MatIconModule
+    MatIconModule,
+    MatListModule
   ],
   providers: [ MatDatepickerModule, MatNativeDateModule],
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -85,13 +87,12 @@ export class AppComponent implements OnInit {
     //   this.applyFilter('');
     // }
   }
- 
+
   // Date range variables (for demonstration)
   startDate!: Date;
   endDate!: Date;
 
-
-  constructor(private partnerService: PartnerService) 
+  constructor(private partnerService: PartnerService)
   {
     const iconRegistry = inject(MatIconRegistry);
     const sanitizer = inject(DomSanitizer);

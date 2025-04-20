@@ -4,12 +4,10 @@ import {
   ViewContainerRef,
   EventEmitter,
   Host,
-  Input,
   Optional,
   Output,
   Renderer2,
   Self,
-  SimpleChanges,
 } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { map, startWith } from 'rxjs';
